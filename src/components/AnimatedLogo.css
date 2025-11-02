@@ -1,0 +1,119 @@
+/* Minimal Logo Styles */
+.minimal-logo {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 10000;
+  pointer-events: none;
+  user-select: none;
+}
+
+.logo-content {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  transition: all 0.3s ease;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.logo-content:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(96, 165, 250, 0.4);
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2),
+              0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transform: translateY(-2px);
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.logo-content:hover .logo-image {
+  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.4));
+  transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .minimal-logo {
+    top: 25px;
+    left: 25px;
+  }
+
+  .logo-content {
+    width: 55px;
+    height: 55px;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .minimal-logo {
+    top: 20px;
+    left: 20px;
+  }
+
+  .logo-content {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+
+  .logo-text {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .minimal-logo {
+    top: 18px;
+    left: 18px;
+  }
+
+  .logo-content {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+  }
+
+  .logo-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .minimal-logo {
+    top: 15px;
+    left: 15px;
+  }
+
+  .logo-content {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+  }
+}
