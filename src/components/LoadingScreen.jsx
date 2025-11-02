@@ -2,43 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './LoadingScreen.css';
 
-const LoadingScreen = ({ onLoadingComplete }) => {
-  const [progress, setProgress] = useState(0);
+const LoadingScreen = ({ progress: externalProgress = 0 }) => {
   const [currentText, setCurrentText] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
   const loadingTexts = [
     "Initializing creative workspace...",
-    "Loading design assets...",
+    "Loading design assets from storage...",
     "Preparing motion graphics...",
     "Setting up portfolio...",
     "Almost ready..."
   ];
 
   useEffect(() => {
-    const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          setIsComplete(true);
-          setTimeout(() => {
-            onLoadingComplete();
-          }, 800);
-          return 100;
-        }
-        return prev + Math.random() * 15;
-      });
-    }, 200);
+    if (externalProgress >= 100) {
+      setIsComplete(true);
+    }
+  }, [externalProgress]);
 
+  useEffect(() => {
     const textInterval = setInterval(() => {
       setCurrentText(prev => (prev + 1) % loadingTexts.length);
-    }, 1000);
+    }, 1500);
 
     return () => {
-      clearInterval(progressInterval);
       clearInterval(textInterval);
     };
-  }, [onLoadingComplete, loadingTexts.length]);
+  }, [loadingTexts.length]);
 
   return (
     <AnimatePresence>
@@ -112,7 +102,7 @@ const LoadingScreen = ({ onLoadingComplete }) => {
               <motion.div
                 className="progress-fill"
                 initial={{ width: "0%" }}
-                animate={{ width: `${Math.min(progress, 100)}%` }}
+                animate={{ width: `${Math.min(externalProgress, 100)}%` }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               />
               <div className="progress-glow"></div>
@@ -123,7 +113,7 @@ const LoadingScreen = ({ onLoadingComplete }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.4 }}
             >
-              {Math.round(Math.min(progress, 100))}%
+              {Math.round(Math.min(externalProgress, 100))}%
             </motion.div>
           </motion.div>
 
